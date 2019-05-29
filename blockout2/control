@@ -1,0 +1,10 @@
+Package: blockout2
+Version: 
+Description: RetroGame port of Blockout 2
+Section: games
+Priority: optional
+Maintainer: pingflood
+Architecture: mipsel
+Homepage: https://github.com/retrofw/blockout2
+Depends:
+Source: https://github.com/retrofw/blockout2

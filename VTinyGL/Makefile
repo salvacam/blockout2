@@ -1,0 +1,35 @@
+#CHAINPREFIX=/opt/mipsel-linux-uclibc-xlib
+CHAINPREFIX=/opt/mipsel-linux-uclibc
+CROSS_COMPILE=$(CHAINPREFIX)/usr/bin/mipsel-linux-
+
+AR = $(CROSS_COMPILE)ar
+CC = $(CROSS_COMPILE)gcc
+CXX = $(CROSS_COMPILE)g++
+STRIP = $(CROSS_COMPILE)strip
+RANLIB = $(CROSS_COMPILE)ranlib
+
+SYSROOT     := $(CHAINPREFIX)/usr/mipsel-buildroot-linux-uclibc/sysroot
+SDL_CFLAGS  := $(shell $(SYSROOT)/usr/bin/sdl-config --cflags)
+SDL_LIBS    := $(shell $(SYSROOT)/usr/bin/sdl-config --libs)
+
+CFLAGS = -std=gnu99 -Iutil -Isrc -Iinclude -O2 -mips32 -mno-mips16 $(SDL_CFLAGS) -lSDL -lX11
+CXXFLAGS = $(CFLAGS)
+OUTPUT = tinygles.a
+
+OBJS = ./src/api.o  ./src/get.o     ./src/list.o      ./src/vertex.o   ./src/zline.o ./src/vgl.o \
+	./src/arrays.o  ./src/glx.o         ./src/matrix.o       ./src/oscontext.o  ./src/zmath.o \
+	./src/clear.o   ./src/image_util.o  ./src/memory.o       ./src/select.o     ./src/ztriangle.o \
+	./src/clip.o    ./src/init.o        ./src/misc.o         ./src/specbuf.o    ./src/zbuffer.o \
+	./src/error.o   ./src/light.o       ./src/msghandling.o  ./src/texture.o    ./src/zdither.o ./src/blend.o
+		
+all: ${OUTPUT} toar
+
+${OUTPUT}:${OBJS}
+	${CC} -c -o  ${OBJS} ${CFLAGS} 
+
+toar:
+	$(AR) cr ${OUTPUT} ${OBJS}
+	$(RANLIB) ${OUTPUT}	
+
+clean:
+	rm  ${OBJS}  ${OUTPUT}

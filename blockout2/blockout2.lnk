@@ -1,0 +1,4 @@
+title=Blockout 2
+description=Blockout2 port
+exec=/home/retrofw/games/blockout2/blockout2.elf
+clock=600
