@@ -1,0 +1,6 @@
+[Desktop Entry]
+Name=Blockout 2
+Comment=Blockout 2 game port
+Exec=blockout2.dge
+Icon=blockout2
+Categories=games;
