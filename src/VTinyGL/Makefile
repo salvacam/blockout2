@@ -1,5 +1,5 @@
-CHAINPREFIX ?= /opt/mipsel-linux-uclibc
-CROSS_COMPILE ?= $(CHAINPREFIX)/usr/bin/mipsel-linux-
+CHAINPREFIX ?= /opt/miyoo
+CROSS_COMPILE ?= $(CHAINPREFIX)/usr/bin/arm-linux-
 
 AR ?= $(CROSS_COMPILE)ar
 CC ?= $(CROSS_COMPILE)gcc
@@ -7,11 +7,11 @@ CXX ?= $(CROSS_COMPILE)g++
 STRIP ?= $(CROSS_COMPILE)strip
 RANLIB ?= $(CROSS_COMPILE)ranlib
 
-SYSROOT     ?= $(CHAINPREFIX)/usr/mipsel-buildroot-linux-uclibc/sysroot
+SYSROOT		= $(shell $(CC) --print-sysroot)
 SDL_CFLAGS  ?= $(shell $(SYSROOT)/usr/bin/sdl-config --cflags)
 SDL_LIBS    ?= $(shell $(SYSROOT)/usr/bin/sdl-config --libs)
 
-CFLAGS = -O2 -std=gnu99 -Iutil -Isrc -Iinclude -mips32 -mno-mips16 $(SDL_CFLAGS)
+CFLAGS = -O2 -std=gnu99 -Iutil -Isrc -Iinclude $(SDL_CFLAGS)
 CXXFLAGS = $(CFLAGS)
 OUTPUT = tinygles.a
 

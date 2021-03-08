@@ -12,15 +12,15 @@
 #---------------------------------------------------------------------
 # All source files needed for the application
 #
-CHAINPREFIX=/opt/mipsel-linux-uclibc
-CROSS_COMPILE=$(CHAINPREFIX)/usr/bin/mipsel-linux-
+CHAINPREFIX=/opt/miyoo
+CROSS_COMPILE=$(CHAINPREFIX)/usr/bin/arm-linux-
 
 AR ?= $(CROSS_COMPILE)ar
 CC ?= $(CROSS_COMPILE)gcc
 CXX ?= $(CROSS_COMPILE)g++
 STRIP ?= $(CROSS_COMPILE)strip
 
-SYSROOT     ?= $(CHAINPREFIX)/usr/mipsel-buildroot-linux-uclibc/sysroot
+SYSROOT		= $(shell $(CC) --print-sysroot)
 SDL_CFLAGS  ?= $(shell $(SYSROOT)/usr/bin/sdl-config --cflags)
 SDL_LIBS    ?= $(shell $(SYSROOT)/usr/bin/sdl-config --libs)
 
@@ -50,7 +50,7 @@ OBJ=    BlockOut.o         PageChooseSetup.o       PageStartGame.o \
 
 #---------------------------------------------------------------------
 
-CXXFLAGS = $(SDL_CFLAGS) -O2 -DRS97 -fdata-sections -ffunction-sections -mips32 -mno-mips16 -fno-rtti -fno-exceptions -fno-math-errno -fno-threadsafe-statics -Dlinux -DTINYSDGL -c -IImageLib/src -I.
+CXXFLAGS = $(SDL_CFLAGS) -O2 -DRS97 -fdata-sections -ffunction-sections -fno-rtti -fno-exceptions -fno-math-errno -fno-threadsafe-statics -Dlinux -DTINYSDGL -c -IImageLib/src -I.
 LFLAGS   = $(SDL_LIBS) -lSDL_mixer ImageLib/src/libimagelib.a VTinyGL/tinygles.a -lpthread -lm -ldl -Wl,--as-needed -Wl,--gc-sections -flto -lz -lpng
 
 #--------------------------------------------------------------------

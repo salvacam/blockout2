@@ -8,8 +8,9 @@
 #---------------------------------------------------------------------
 # All source files needed for the library
 #
-CHAINPREFIX ?= /opt/mipsel-linux-uclibc
-CROSS_COMPILE ?= $(CHAINPREFIX)/usr/bin/mipsel-linux-
+CHAINPREFIX ?= /opt/miyoo
+CROSS_COMPILE ?= $(CHAINPREFIX)/usr/bin/arm-linux-
+
 
 AR ?= $(CROSS_COMPILE)ar
 
